@@ -4,7 +4,10 @@
 [![Static Badge](https://img.shields.io/badge/Kotlin-black?logo=kotlin)]()
 [![Static Badge](https://img.shields.io/badge/Download--apk-black?logo=android)](https://github.com/SakshamSharma2026/FilmRave-Android/releases)
 
-<img src="https://github.com/SakshamSharma2026/FilmRave-Android/blob/master/assets/Screenshot_1709485947.png" width="300" height="700"/>
+<img src="https://github.com/SakshamSharma2026/FilmRave-Android/blob/master/assets/Screenshot_1709485947.png" width="350" height="700"/>
+<img src="https://github.com/SakshamSharma2026/FilmRave-Android/blob/master/assets/Screenshot_1709485953.png" width="350" height="700"/>
+<img src="https://github.com/SakshamSharma2026/FilmRave-Android/blob/master/assets/Screenshot_1709485974.png" width="350" height="700"/>
+
 
 Welcome to filmRave, the ultimate movie app for film lovers! With filmRave, you can easily discover new movies, manage your watchlist, and get detailed information about your favorite films, all in one convenient place.
 
