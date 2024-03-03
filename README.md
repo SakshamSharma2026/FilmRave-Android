@@ -1,6 +1,9 @@
 
 # FilmRave-Android 🍿🎬
 
+[![Static Badge](https://img.shields.io/badge/Kotlin-black?logo=kotlin)]()
+[![Static Badge](https://img.shields.io/badge/Download--apk-black?logo=android)](https://github.com/SakshamSharma2026/FilmRave-Android/releases)
+
 ![App Screenshot]()
 
 Welcome to filmRave, the ultimate movie app for film lovers! With filmRave, you can easily discover new movies, manage your watchlist, and get detailed information about your favorite films, all in one convenient place.
