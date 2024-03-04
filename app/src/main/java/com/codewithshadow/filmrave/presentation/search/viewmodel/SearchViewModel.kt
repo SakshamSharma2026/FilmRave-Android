@@ -10,6 +10,8 @@ import com.codewithshadow.filmrave.domain.usecases.SearchListInfoUseCase
 import com.codewithshadow.filmrave.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -20,6 +22,8 @@ class SearchViewModel @Inject constructor(
     private val searchListInfoUseCase: SearchListInfoUseCase,
 ) : ViewModel() {
 
+    private var job: Job? = null
+
     private val _trendingMedia = MutableLiveData<NetworkResult<MovieList>>()
     val trendingMedia: LiveData<NetworkResult<MovieList>> = _trendingMedia
 
@@ -28,6 +32,7 @@ class SearchViewModel @Inject constructor(
     val searchedMedia: LiveData<NetworkResult<MovieList>> = _searchedMedia
 
     fun trendingMovies() = viewModelScope.launch {
+        job?.cancel()
         viewModelScope.launch(Dispatchers.IO) {
             searchListInfoUseCase.getTrendingMovies().onEach { result ->
                 _trendingMedia.postValue(result)
@@ -35,8 +40,10 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    fun searchMedia(searchQuery: String) = viewModelScope.launch {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun searchMedia(searchQuery: String) {
+        job?.cancel()
+        job = viewModelScope.launch(Dispatchers.IO) {
+            delay(500)
             searchListInfoUseCase.searchMovieData(searchQuery).onEach { result ->
                 _searchedMedia.postValue(result)
             }.launchIn(this)

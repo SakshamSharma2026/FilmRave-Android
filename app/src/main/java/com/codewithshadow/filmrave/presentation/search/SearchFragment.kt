@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.codewithshadow.filmrave.R
 import com.codewithshadow.filmrave.databinding.FragmentSearchBinding
@@ -24,9 +23,6 @@ import com.codewithshadow.filmrave.utils.showToast
 import com.codewithshadow.filmrave.utils.visible
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment() {
@@ -41,7 +37,6 @@ class SearchFragment : BaseFragment() {
     private lateinit var horizontalAdapter: HorizontalAdapter
     private lateinit var topSearchesAdapter: TopSearchesAdapter
     private var query: String? = null
-    private var job: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,11 +103,11 @@ class SearchFragment : BaseFragment() {
                     query = it.trim().toString()
                     binding.apply {
                         if (it.isNotEmpty() && it.isNotBlank()) { // Make it visible on getting results
-                            performSearch(it.trim().toString())
+                            searchViewModel.searchMedia(
+                                searchQuery = it.trim().toString()
+                            )
                         } else {
                             searchViewModel.trendingMovies()
-                            // also cancel the job
-                            job?.cancel()
                         }
                     }
                 }
@@ -162,17 +157,6 @@ class SearchFragment : BaseFragment() {
                     }
                 }
             }
-        }
-    }
-
-    private fun performSearch(searchQuery: String) {
-        job?.cancel()
-        job = viewLifecycleOwner.lifecycleScope.launch {
-            // first let's wait for change in input search query
-            delay(800)
-            searchViewModel.searchMedia(
-                searchQuery = searchQuery
-            )
         }
     }
 
